@@ -1,0 +1,30 @@
+<html>
+
+<head>
+    <title> Form </title>
+    <link rel=stylesheet href="logReg.css">
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-auth.js"></script>
+
+    <script src="newLogin.js"></script>
+</head>
+
+<body>
+    <div class="login-page" id="formContainer">
+        <div class="form" id="header">
+            <h1>Login Page</h1>
+            <input type="email" placeholder="Email" id="email" />
+            <input type="password" placeholder="Password" id="password" />
+            <p class="message">Not registered yet? <a href="newReg.html"> Sign up </a></p>
+            <button onclick="signIn()" id="signIn"> Sign In </button>
+            <!-- <button onclick="signOut()" id="signOut"> Sign Out </button> -->
+        </div>
+    </div>
+</body>
+
+
+</html>

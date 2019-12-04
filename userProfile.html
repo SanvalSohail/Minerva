@@ -1,0 +1,131 @@
+<!doctype html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title> Form </title>
+    <link rel=stylesheet href="userProfile.css">
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-auth.js"></script>
+
+    <script src="userProfile.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropDown" data-toggle="dropdown">Products</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Product1</a>
+                        <a class="dropdown-item" href="#">Product2</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Product3</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="mx-auto order-0">
+            <a class="navbar-brand mx-auto" href="#">Bootsrap Frontend</a>
+        </div>
+        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Post</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="newLogin.html">Login</a>
+                </li>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </ul>
+        </div>
+    </nav>
+    <div class="login-page" id="formContainer">
+        <table class="form" id="table">
+            <tr>
+                <th>
+                    <h1>User Profile</h1>
+                </th>
+                <th>
+
+                </th>
+                <th>
+                    <input type="password" id="passChange" placeholder="Change your password">
+                </th>
+                <th>
+                    <button onclick="savePass()" id="updatePass"> Update Password </button>
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <label>Email: </label>
+                </th>
+                <th>
+                    <label type="text" id="email"></label>
+                </th>
+                <th>
+                    <input type="email" id="emailChange" placeholder="Change your Email">
+                </th>
+                <th>
+                    <button onclick="saveEmail()" id="updateMail"> Update Email </button>
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <label>Username: </label>
+                </th>
+                <th>
+                    <label type="text" id="username"></label>
+                </th>
+                <th>
+                    <input type="text" id="nameChange" placeholder="Change your username">
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <label>Avatar: </label>
+                </th>
+                <th>
+                    <img id="photoUrl" height="200" width="300"></img>
+                </th>
+                <th>
+                    <input type="text" id="picChange" placeholder="URL for new Avatar">
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <button onclick="signOut()" id="signOut"> Sign Out </button>
+                </th>
+                <th>
+
+                </th>
+                <th>
+                    <button onclick="deleteUser()" id="deleteUser"> Delete account </button>
+                </th>
+                <th>
+                    <button onclick="saveProfile()" id="updateProf"> Update Profile </button>
+                </th>
+            </tr>
+    </div>
+
+
+    </table>
+    </div>
+</body>
+
+</html>

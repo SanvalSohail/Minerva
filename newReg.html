@@ -1,0 +1,33 @@
+<html>
+
+<head>
+    <title> Form </title>
+    <link rel=stylesheet href="logReg.css">
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-auth.js"></script>
+
+    <script src="newReg.js"></script>
+</head>
+
+<body>
+    <div class="login-page" id="formContainer">
+        <div class="form" id="header">
+            <h1>Registration Page</h1>
+            <input type="email" placeholder="Email" id="email"/>
+            <input type="password" placeholder="Password" id="password"/>
+            <input type="text" placeholder="Username" id="username"/>
+            <!-- <input type="file" name="pic" id="photoUrl" accept="image/*"> -->
+            <input type="text" name="pic" id="photoUrl" placeholder="Url for your avatar">
+            <p class="message">Already registered? <a href="newLogin.html"> Login here </a></p>
+            
+            <button onclick="signUp()" id="signUp"> Sign Up </button>
+        </div>
+    </div>
+</body>
+
+
+</html>

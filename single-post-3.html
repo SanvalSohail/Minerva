@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+	<!-- Adnan stuff -->
+	<script>
+		
+		var postToLoad = '8CUE2s1UYqVYMqdmvNW8';
+		var refToPost = 'leedaleedaleedaleee';
+		var upvotes;
+		var downvotes;
+		
+		//Contains references to database locations of all replies (including body)
+		var replyLocations = {};
+		
+		//Contains references to scores of different 
+		//Format: [upvote,downvote,upvoteOnPage,downvoteOnPage]
+		var voteCounts = {};
+		
+		//USED FOR COMMENTS TABLE STUFF
+		var commentTag = '!!!';
+		var replyTag = '@@@';
+		var upvoteTag = '###';
+		var downvoteTag = '$$$';
+		var upButTag = '%%%';
+		var downButTag = '^^^';
+		
+		//PICTURES FOR BUTTONS
+		var upPic = 'img/up.png';
+		var downPic = 'img/down.png';
+		var upPressedPic = 'img/upPressed.png';
+		var downPressedPic = 'img/downPressed.png';
+		
+	</script>
+
+	<!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Title -->
+    <title>Minerva</title>
+
+</head>
+
+<body onload='loadPost(postToLoad)'>
+    <!-- Preloader -->
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="lds-ellipsis">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+	</div>
+	
+   <!-- ##### Header Area Start ##### -->
+    <header class="header-area">
+        <!-- Navbar Area -->
+        <div class="newsbox-main-menu">
+            <div class="classy-nav-container breakpoint-off">
+                <div class="container-fluid">
+                    <!-- Menu -->
+                    <nav class="classy-navbar justify-content-between" id="newsboxNav">
+
+                        <!-- Nav brand -->
+                        <a href="home.html" class="nav-brand"><img src="img/minervaLogo.png" alt=""></a>
+						
+						<a href="home.html" class="nav-brand"><img src="img/owl-logo.png" alt=""></a>
+
+                        <!-- Navbar Toggler -->
+
+                        <!-- Menu -->
+                        <div class="classy-menu">
+
+                            <!-- Close Button -->
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+
+                            <!-- Nav Start -->
+                            <div class="classynav">
+                                <ul>
+                                    </li>
+                                    <li><a href="#" onclick='signOut()'>Sign In | Sign Out</a>
+                                </ul>
+                            </div>
+                            <!-- Nav End -->
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+		<!-- HERE TEST -->
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark ftco-navbar-light" id="ftco-navbar">
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav mr-auto">
+			<p><font color="black">MinervaRox</font> </p>
+			
+	        	<li class="nav-item"><a href="home.html" class="nav-link">Home</a></li>
+				
+				<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Latest News</a>
+						  <div class="dropdown-menu">
+							<a class="dropdown-item" href="#">Link 1</a>
+							<a class="dropdown-item" href="#">Link 2</a>
+							<a class="dropdown-item" href="#">Link 3</a>
+						  </div>
+						</li>
+	        	<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Local News</a>
+						  <div class="dropdown-menu">
+							<a class="dropdown-item" href="#">Link 1</a>
+							<a class="dropdown-item" href="#">Link 2</a>
+							<a class="dropdown-item" href="#">Link 3</a>
+						  </div>
+						</li>
+						<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">International News</a>
+						  <div class="dropdown-menu">
+							<a class="dropdown-item" href="#">Link 1</a>
+							<a class="dropdown-item" href="#">Link 2</a>
+							<a class="dropdown-item" href="#">Link 3</a>
+						  </div>
+						</li>
+	          <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+			  
+	        </ul>
+			</div>
+		
+		     <div class="navbar-nav ml-auto">
+            <input type="text" class="form-control pl-3" placeholder="Search">
+          </div>
+		
+	  </nav>
+	  <nav><p><font color="white">MinervasCute</font></p></nav>
+    </header>
+    <!-- ##### Header Area End ##### -->
+
+    <!-- ##### Breaking News Area Start ##### -->
+    <section class="breaking-news-area clearfix">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <!-- Breaking News Widget -->
+                    <div class="breaking-news-ticker d-flex flex-wrap align-items-center">
+                        <div class="title">
+                            <h6>Trending</h6>
+                        </div>
+                        <div id="breakingNewsTicker" class="ticker">
+                            <ul>
+                                <li><a href="#">New Traffic Policies Downtown</a></li>
+                                <li><a href="#">Transit Fare Debate</a></li>
+                                <li><a href="#">Sports and Politics</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ##### Breaking News Area End ##### -->
+
+    <!-- ##### Post Details Title Area Start ##### -->
+    <div id='postPic' class="post-details-title-area bg-overlay clearfix" style="background-image: url(img/22.jpg)">
+        <div class="container-fluid h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12 col-lg-8">
+                    <!-- Post Content -->
+                    <div class="post-content">
+                        <p class="tag"><span>Featured</span></p>
+                        <p id='postTitle' class="post-title">Loading..</p>
+                        <div class="d-flex align-items-center">
+                            <span class="post-date mr-30">November 29, 2019</span>
+                            <span id='postAuthor' class="post-date">Loading..</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Post Details Title Area End ##### -->
+
+    <!-- ##### Post Details Area Start ##### -->
+    <section class="post-news-area section-padding-100-0 mb-70">
+        <div class="container">
+            <div class="row justify-content-center">
+                <!-- Post Details Content Area -->
+                <div class="col-12 col-lg-8">
+					
+					<div id='postBody' class="post-details-content mb-100">
+						Loading..
+					</div>
+
+					<section class='end-article-area clearfix' >
+						
+						<div class='container-fluid'>						
+							<div class='row'>
+							
+								<h3Two> End of Article </h3Two>
+								<div class='col'>
+									
+								</div>
+								<div class='col-2'>
+									
+												<img id='up' src = 'img/up.png' onclick='changeScore(refToPost.id,"up","down")'/>
+
+												<img id='down' src='img/down.png' onclick='changeScore(refToPost.id,"down","up")' />
+										
+									<div class="d-flex md-100" margin-bottom='0'>
+											<pre> </pre>
+											<p2 id='upvotes' > Loading.. </p2>
+											<pre>    </pre>
+											<p2 id='downvotes' > Loading.. </p2>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						
+						
+							
+						
+					
+					</section>
+                    <!-- Comment Area Start -->
+                    <div class="comment_area clearfix mb-100">
+                        <h4 class="mb-50">Comments</h4>
+
+                        <ol id='commentList'>
+                            
+                                
+                        </ol>
+                    </div>
+
+                    <div class="post-a-comment-area mb-30 clearfix">
+                        <h4 class="mb-50">Leave a reply</h4>
+
+                        <!-- Reply Form -->
+                        <div class="contact-form-area">
+                            <form action="#" method="post">
+                                <div class="row">
+                                    <div class="col-12 col-lg-6">
+                                        <input type="text" class="form-control" id="name" placeholder="Name*">
+                                    </div>
+                                    <div class="col-12 col-lg-6">
+                                        <input type="email" class="form-control" id="email" placeholder="Email*">
+                                    </div>
+                                    <div class="col-12">
+                                        <textarea id='commentBox' name="message" class="form-control" id="message" cols="30" rows="10" placeholder="Message"></textarea>
+                                    </div>     
+                                </div>
+                            </form>
+							<div class="col-12">
+                                        <button class="btn newsbox-btn mt-30" type="submit" onclick='reply(refToPost.id,document.getElementById("commentList"))'>Submit Comment</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar Widget -->
+                <div class="col-12 col-sm-9 col-md-6 col-lg-4">
+                    <div class="sidebar-area">
+
+                        <!-- Newsletter Widget -->
+                        <div class="single-widget-area newsletter-widget mb-30">
+                            <h4>Subscribe to One-Stop-Politics</h4>
+                            <form action="#" method="post">
+                                <input type="email" name="nl-email" id="nlemail" placeholder="Your E-mail">
+                                <button type="submit" class="btn newsbox-btn w-100">Subscribe</button>
+                            </form>
+                            <p class="mt-30">Nullam lacinia ex eleifend orci porttitor, suscipit interdum augue condimentum</p>
+                        </div>
+
+                        
+
+                        <div class="single-widget-area news-widget mb-30">
+                            <h4>Latest News</h4>
+
+                            <!-- Single News Area -->
+                            <div class="single-blog-post d-flex style-4 mb-30">
+                                <!-- Blog Thumbnail -->
+                                <div class="blog-thumbnail">
+                                    <a href="#"><img src="img/rally3.jpg" alt=""></a>
+                                </div>
+
+                                <!-- Blog Content -->
+                                <div class="blog-content">
+                                    <span class="post-date">June 20, 2018</span>
+                                    <a href="#" class="post-title">Politics of Canada</a>
+                                </div>
+                            </div>
+
+                            <!-- Single News Area -->
+                            <div class="single-blog-post d-flex style-4 mb-30">
+                                <!-- Blog Thumbnail -->
+                                <div class="blog-thumbnail">
+                                    <a href="#"><img src="img/rally1.jpg" alt=""></a>
+                                </div>
+
+                                <!-- Blog Content -->
+                                <div class="blog-content">
+                                    <span class="post-date">June 20, 2018</span>
+                                    <a href="#" class="post-title">Politics of America</a>
+                                </div>
+                            </div>
+
+                            <!-- Single News Area -->
+                            <div class="single-blog-post d-flex style-4 mb-30">
+                                <!-- Blog Thumbnail -->
+                                <div class="blog-thumbnail">
+                                    <a href="#"><img src="img/rally2.jpg" alt=""></a>
+                                </div>
+
+                                <!-- Blog Content -->
+                                <div class="blog-content">
+                                    <span class="post-date">June 20, 2018</span>
+                                    <a href="#" class="post-title">The Life of a Canadian Politician</a>
+                                </div>
+                            </div>
+
+                            <!-- Single News Area -->
+                            <div class="single-blog-post d-flex style-4 mb-30">
+                                <!-- Blog Thumbnail -->
+                                <div class="blog-thumbnail">
+                                    <a href="#"><img src="img/rally4.jpg" alt=""></a>
+                                </div>
+
+                                <!-- Blog Content -->
+                                <div class="blog-content">
+                                    <span class="post-date">June 20, 2018</span>
+                                    <a href="#" class="post-title">The Life of a American Politician</a>
+                                </div>
+                            </div>
+
+                            <!-- Single News Area -->
+                            <div class="single-blog-post d-flex style-4 mb-30">
+                                <!-- Blog Thumbnail -->
+                                <div class="blog-thumbnail">
+                                    <a href="#"><img src="img/22.jpg" alt=""></a>
+                                </div>
+
+                                <!-- Blog Content -->
+                                <div class="blog-content">
+                                    <span class="post-date">June 20, 2018</span>
+                                    <a href="#" class="post-title">Politics of Transit</a>
+                                </div>
+                            </div>
+                        </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ##### Post Details Area End ##### -->
+
+    <!-- ##### Footer Area Start ##### -->
+    <footer class="footer-area">
+        <!-- Footer Logo -->
+        <div class="footer-logo mb-15">
+            <a href="home.html"><img src="img/minervaFooter.png" alt=""></a>
+        </div>
+        <!-- Footer Content -->
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="footer-content text-center">
+                        <div class="footer-social-info">
+                            <a href="#" data-toggle="tooltip" data-placement="top" title="Pinterest"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+                            <a href="#" data-toggle="tooltip" data-placement="top" title="Facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                            <a href="#" data-toggle="tooltip" data-placement="top" title="Twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                            <a href="#" data-toggle="tooltip" data-placement="top" title="Linkedin"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- ##### Footer Area Start ##### -->
+
+    <!-- ##### All Javascript Script ##### -->
+    <!-- jQuery-2.2.4 js -->
+    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <!-- Popper js -->
+    <script src="js/bootstrap/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <!-- All Plugins js -->
+    <script src="js/plugins/plugins.js"></script>
+    <!-- Active js -->
+    <script src="js/active.js"></script>
+	
+	
+	<!-- The core Firebase JS SDK is always required and must be listed first -->
+	<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-firestore.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-database.js"></script>	
+	<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-analytics.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-auth.js"></script>
+	
+	<script>
+		
+		// Your web app's Firebase configuration
+		var firebaseConfig = {
+			apiKey: "AIzaSyB2RfNNkFvXgnVQ-FxPaK4Wpu9Hf8jKuFU",
+			authDomain: "minerva-b0468.firebaseapp.com",
+			databaseURL: "https://minerva-b0468.firebaseio.com",
+			projectId: "minerva-b0468",
+			storageBucket: "minerva-b0468.appspot.com",
+			messagingSenderId: "139321788999",
+			appId: "1:139321788999:web:f8ae5f57eb46255033ff62",
+			measurementId: "G-N7EY4BFK0R"
+		};
+		// Initialize Firebase
+		firebase.initializeApp(firebaseConfig);
+		const db = firebase.firestore();
+		firebase.analytics();
+		const auth = firebase.auth();
+		
+		
+		function test()
+		{
+			console.log('nice test');
+		}
+		
+	
+		
+		//Fetches the data for the requested post 
+		//populates webpage
+		function loadPost(post)
+		{	
+
+			
+			replyLocations = {};
+			voteCounts = {};
+			refToPost = db.collection('posts').doc(post);
+			replyLocations[refToPost.id] = db.collection('posts').doc(post);
+			
+			
+			db.collection('posts').doc(post).get().then(function(requestedDoc){ 
+				var data = requestedDoc.data();
+				//Set title, author, body and upvote/downvotes
+				document.getElementById('postTitle').innerHTML = data['title'];
+				document.getElementById('postAuthor').innerHTML = 'Posted by: ' + data['author'];
+				document.getElementById('postBody').innerHTML = data['body'];
+				var picture = document.getElementById('postPic');
+				picture.setAttribute('style',"background-image: url(" + data['picture'] + ")");
+				upvotes = data['Upvotes'];
+				document.getElementById('upvotes').innerHTML = data['upvotes'];
+				downvotes = data['Downvotes'];
+				document.getElementById('downvotes').innerHTML = data['downvotes'];
+				voteCounts[refToPost.id] = [data['upvotes'],data['downvotes'],'upvotes','downvotes'];
+				
+		
+				//Retrieve all comments
+				getAllComments(refToPost.collection('replies'),document.getElementById('commentList'));
+			});
+		}
+		
+		//Iterates through database and gets all the replies of all the comments
+		function getAllComments(listOfComments, targetLoc)
+		{
+			//For the given list of comments..
+			listOfComments.get().then(function(comments){ 
+				//Go through each comment..
+				comments.forEach(function(c){
+					//Adds comment
+					//console.log(c);
+					var ol = addCommentToPage(c, targetLoc, listOfComments);
+					
+					//Iterate through this comment's replies
+					getAllComments(listOfComments.doc(c.id).collection('replies'), ol);
+				});
+
+			});
+		}
+		
+		
+		//Replies to the given parent (post or comment)
+		function reply(index, targetLoc)
+		{
+			console.log('alright far out, peace out.');
+			var newCom = replyLocations[index].collection('replies').doc();
+			
+			//Add to database
+			newCom.set({comment : document.getElementById('commentBox').value,
+						upvotes : 0,
+						downvotes: 0});
+			console.log(newCom);
+			
+			//Had to do this thing to actually get to the doc we just made wow
+			replyLocations[index].collection('replies').get().then(function(querySnapshot){ 
+				querySnapshot.docs.forEach(function (doc){
+					if (doc.id == newCom.id)
+					{
+						addCommentToPage(doc, targetLoc, replyLocations[index].collection('replies')); 
+					}
+				})
+			});
+		}
+		
+		//Does the work of creating the page elements necessary to display it
+		//comment -> comment to add
+		//targetLoc -> where to add it
+		//listOfComments -> path to access this comment
+		//returns -> the location where replies to this comment will go
+		function addCommentToPage(comment, targetLoc, listOfComments)
+		{
+			//var ol = document.getElementById('commentList');
+			//Page elements for comment
+			var sca = document.createElement('li');
+				sca.setAttribute('class','single_comment_area');
+			var ccdf = document.createElement('div');
+				ccdf.setAttribute('class','comment-content d-flex');
+			var ca = document.createElement('div');
+				ca.setAttribute('class','comment-author');
+			var im = document.createElement('img');
+				im.setAttribute('src','img/38.jpg');
+				im.setAttribute('alt','author');
+			var cm = document.createElement('div');
+				cm.setAttribute('class','comment-meta');
+			var df = document.createElement('div');
+				df.setAttribute('class','d-flex');
+			var df2 = document.createElement('div');
+				df2.setAttribute('class','d-flex');
+			var auth = document.createElement('a');
+				auth.setAttribute('href','#');
+				auth.setAttribute('class','post-author');	
+				auth.innerHTML = 'Joe Shmoe';
+			var date = document.createElement('a');
+				date.setAttribute('href','#');
+				date.setAttribute('class','post-date');		
+				date.innerHTML = 'DateDate';
+			var rep = document.createElement('a');
+				rep.setAttribute('href','#');
+				rep.setAttribute('class','reply');
+				//Making sure when this reply button is pressed, the reply is added in the right place
+				rep.setAttribute('onclick','reply("' + comment.id +'",document.getElementById("' + comment.id +'"))');
+				rep.innerHTML = 'Reply'
+			var comBod = document.createElement('p');
+				comBod.innerHTML = comment.data()['comment'];
+			var pre = document.createElement('pre');
+				pre.innerHTML = '   ';
+			//Vote elements (set up below)
+			var upCount = document.createElement('p');
+			var downCount = document.createElement('p');
+			var u = document.createElement('img');
+			var d = document.createElement('img');
+			
+			var tab = document.createElement('table');
+			var tr = document.createElement('tr');
+			var uptd = document.createElement('td');
+			var dummytd = document.createElement('td');
+			var dummypre = document.createElement('pre');
+				dummypre.innerHTML = ' ';
+			
+			var downtd = document.createElement('td');
+			dummytd.appendChild(dummypre);
+			tr.appendChild(uptd); tr.appendChild(dummytd); tr.appendChild(downtd);
+			tab.appendChild(tr);
+				
+			//Put things together	
+			df.appendChild(auth); df.appendChild(date); df.appendChild(rep); 
+			cm.appendChild(df); cm.appendChild(comBod); cm.appendChild(tab); cm.appendChild(df2);
+			ca.appendChild(im);
+			ccdf.appendChild(ca); ccdf.appendChild(cm); 
+			sca.appendChild(ccdf);
+			targetLoc.appendChild(sca);
+			
+			//Sublist for adding replies, if any
+			var ol = document.createElement('ol');
+			ol.setAttribute('class','children');
+			ol.setAttribute('id',comment.id);
+			sca.appendChild(ol);
+			
+			//Add to reply locations
+			replyLocations[comment.id] = listOfComments.doc(comment.id);
+			
+			//Vote stuff
+			
+			//Upvote label
+			upCount.setAttribute('id',comment.id + upvoteTag);
+			
+			//Downvote label
+			downCount.setAttribute('id',comment.id + downvoteTag);
+			
+			//This comment's upvote button
+			var u = document.createElement('img');
+			u.setAttribute('id', comment.id + upButTag);
+			u.setAttribute('src',upPic);
+			u.setAttribute('height','20');
+			u.setAttribute('width','20');
+			//Making sure changeScore is called with correct parameters
+			u.setAttribute('onclick','changeScore("' + comment.id +'","' + (comment.id + upButTag) + '","' + (comment.id + downButTag) +'")');
+			//up.appendChild(u);
+			
+			//This comment's downvote button
+			var d = document.createElement('img');
+			d.setAttribute('id', comment.id + downButTag);
+			d.setAttribute('src',downPic);
+			d.setAttribute('height','20');
+			d.setAttribute('width','20');
+			//Making sure changeScore is called with correct parameters
+			d.setAttribute('onclick','changeScore("' + comment.id +'","' + (comment.id + downButTag) + '","' + (comment.id + upButTag) +'")');
+			//down.appendChild(d);
+
+
+			//Add to vote counts
+			voteCounts[comment.id] = [comment.data()['upvotes'],comment.data()['downvotes'],upCount.getAttribute('id'),downCount.getAttribute('id')];
+			upCount.innerHTML = voteCounts[comment.id][0];
+			downCount.innerHTML = voteCounts[comment.id][1];
+			
+			
+			for (i = 0; i < upCount.innerHTML.length-2; i++)
+			{
+				pre.innerHTML = pre.innerHTML.substring(0,pre.innerHTML.length-1)
+			}
+		
+			//Add vote stuff to comment
+			//Put things together	
+			uptd.appendChild(u); df2.appendChild(upCount); df2.appendChild(pre);  downtd.appendChild(d); df2.appendChild(downCount); 
+			
+			return ol;
+			
+		}
+		//Does the work of creating the page elements necessary to display it
+		//comment -> comment to add
+		//targetLoc -> where to add it
+		//listOfComments -> path to access this comment
+		//returns -> the location where replies to this comment will go
+		function actp(comment, targetLoc, listOfComments)
+		{
+		
+			//Creating and appending elements
+			//For the comment itself
+			var li = document.createElement('li');
+			var tab = document.createElement('table');
+			var row = document.createElement('tr');
+			var comSpace = document.createElement('td');
+			var repSpace = document.createElement('td');
+			//For its score
+			var up = document.createElement('td');
+			var down = document.createElement('td');
+			var upCount = document.createElement('td');
+			var downCount = document.createElement('td');
+			
+			row.appendChild(comSpace); row.appendChild(repSpace);
+			row.appendChild(up); row.appendChild(upCount); row.appendChild(down); row.appendChild(downCount); 
+			tab.appendChild(row);
+			li.appendChild(tab);
+			comSpace.innerHTML = comment.data()['comment'];
+			targetLoc.appendChild(li);
+			
+			
+			//Sublist for adding replies, if any
+			var ul = document.createElement('ul');
+			ul.setAttribute('id',comment.id);
+			targetLoc.appendChild(ul);
+			
+			//Add to reply locations
+			replyLocations[comment.id] = listOfComments.doc(comment.id);
+			
+			
+			
+			//This comment's reply button
+			var b = document.createElement('img');
+			b.setAttribute('src','reply.png');
+			b.setAttribute('height','20');
+			b.setAttribute('width','20');
+			//Making sure when this reply button is pressed, the reply is added in the right place
+			b.setAttribute('onclick','reply("' + comment.id +'",document.getElementById("' + comment.id +'"))');
+			repSpace.appendChild(b);
+			
+			//Vote stuff
+			
+			//Upvote label
+			upCount.setAttribute('id',comment.id + upvoteTag);
+			
+			//Downvote label
+			downCount.setAttribute('id',comment.id + downvoteTag);
+			
+			//This comment's upvote button
+			var u = document.createElement('img');
+			u.setAttribute('id', comment.id + upButTag);
+			u.setAttribute('src',upPic);
+			u.setAttribute('height','20');
+			u.setAttribute('width','20');
+			//Making sure changeScore is called with correct parameters
+			u.setAttribute('onclick','changeScore("' + comment.id +'","' + (comment.id + upButTag) + '","' + (comment.id + downButTag) +'")');
+			up.appendChild(u);
+			
+			//This comment's downvote button
+			var d = document.createElement('img');
+			d.setAttribute('id', comment.id + downButTag);
+			d.setAttribute('src',downPic);
+			d.setAttribute('height','20');
+			d.setAttribute('width','20');
+			//Making sure changeScore is called with correct parameters
+			d.setAttribute('onclick','changeScore("' + comment.id +'","' + (comment.id + downButTag) + '","' + (comment.id + upButTag) +'")');
+			down.appendChild(d);
+
+
+			//Add to vote counts
+			voteCounts[comment.id] = [comment.data()['upvotes'],comment.data()['downvotes'],upCount.getAttribute('id'),downCount.getAttribute('id')];
+			upCount.innerHTML = voteCounts[comment.id][0];
+			downCount.innerHTML = voteCounts[comment.id][1];
+			
+			return ul;
+					
+		}
+	
+		//Changes the score of a post/comment
+		//index -> id of post/comment
+		//thisBut -> button that was pressed
+		//otherBut -> other button
+		function changeScore(index,thisBut,otherBut)
+		{
+		
+			//Upvote button is unpressed
+			if (document.getElementById(thisBut).getAttribute('src') == upPic)
+			{
+				voteCounts[index][0]++;
+				document.getElementById(thisBut).setAttribute('src',upPressedPic);
+				//If downvote is also pressed
+				if (document.getElementById(otherBut).getAttribute('src') == downPressedPic)
+				{
+					voteCounts[index][1]--;
+					document.getElementById(otherBut).setAttribute('src',downPic);
+				}
+			}
+			
+			//Upvote button is pressed
+			else if (document.getElementById(thisBut).getAttribute('src') == upPressedPic)
+			{
+				voteCounts[index][0]--;
+				document.getElementById(thisBut).setAttribute('src',upPic);
+			}
+				
+		
+			//Downvote button is unpressed
+			else if (document.getElementById(thisBut).getAttribute('src') == downPic)
+			{
+				voteCounts[index][1]++;
+				document.getElementById(thisBut).setAttribute('src',downPressedPic);
+				//If upvote was also pressed
+				if (document.getElementById(otherBut).getAttribute('src') == upPressedPic)
+				{
+					voteCounts[index][0]--;
+					document.getElementById(otherBut).setAttribute('src',upPic);
+				}
+			}
+			
+			//Downvote button is pressed
+			else if (document.getElementById(thisBut).getAttribute('src') == downPressedPic)
+			{
+				voteCounts[index][1]--;
+				document.getElementById(thisBut).setAttribute('src',downPic);
+			}
+			
+			
+			//Update in database and on page
+			document.getElementById(voteCounts[index][2]).innerHTML = voteCounts[index][0];
+			document.getElementById(voteCounts[index][3]).innerHTML = voteCounts[index][1];
+			replyLocations[index].update({upvotes : voteCounts[index][0]});
+			replyLocations[index].update({downvotes : voteCounts[index][1]});
+		}
+	</script>
+	
+	<script src="index.js"></script>
+</body>
+
+</html>
